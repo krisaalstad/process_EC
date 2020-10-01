@@ -1,0 +1,155 @@
+ Eddy covariance processing module structure.f90.
+ Run on the:20151020
+ @:054745.519+0200
+ 
+ 
+ ////////////////////////////////////////////////////////////////////////
+ //////////////// Parameters ////////////////////////////////////////////
+ 	Sampling frequency:          20  [Hz]
+ 	Block averaging period:          30  [mins]
+  	Sonic bearing:   215.00000000000000       [degrees from North]
+ 	IRGA bearing:   245.00000000000000       [degrees from North]
+ 	Sensor separation:  0.21999999880790710       [m]
+ 	Base sonic height:   2.7500000000000000       [m] AGL
+ 	Excluding winds from the bearing bin:          15  to           55  [degrees from North], due to upwind flow distortion
+ 	Spectral window length:         210  [mins]
+ 	Smallest resolved spectral period (1/f_ny):  0.10000000      [s]
+ 	Autocorrelation (R) and structure function (D) window length:          30  [mins]
+ 	Base lag used in R&D:   30.000000000000000       [seconds]
+ 
+ 
+ ////////////////////////////////////////////////////////////////////////
+ //////////////// Options    ////////////////////////////////////////////
+ 	Monitored changes in sensor height AGL: T
+ 	Write high frequency data to output file: F
+ 	Detrend spectra: T
+ 	Taper	spectra: T
+ 	Taper	type:H 
+ 
+ 
+ ---------------------------------------------------------------------
+ Reading from file:../input/TOA5_1549.ts2_data.dat                                                 
+ -->Time elapsed scanning input file structure =   1.2304462666666951      , minutes.
+ -->NaN placeholder is nanreal=       -1000
+ -->Time elapsed in reading data from file   18.889445033333324      mins
+ -->Data runs from   2008.0000000000000        12.000000000000000        28.000000000000000        14.000000000000000        0.0000000000000000       5.00000000000000028E-002
+ 	and to    2009.0000000000000        1.0000000000000000        17.000000000000000        13.000000000000000        22.000000000000000        27.399999999999999     
+    @ 20Hz corresponds to    34514948  lines of data
+    with N NaNs=           0
+ **Done reading from file**
+ ---------------------------------------------------------------------
+ ***************************************
+ Commencing physical plausability test confinelims()
+ -->ulim flags=           2
+ -->vlim flags=           6
+ -->wlim flags=         422
+ -->Tlim flags=           0
+ -->hlim flags=     1982069  lower limit %:          43
+ **end of confinelims()**
+ ***************************************
+ ***************************************
+ Starting despiking algorithm MADspike()
+  -->Despiked=   6.1904078      % of the data in the file
+ Done despiking with MADspike()	       
+ ***************************************
+ ***************************************
+ Starting higher order moment analysis skewkurt()
+ -->% Blocks hard flagged for skewness(T)=  0.10438413    
+ -->% Blocks hard flagged for skewness(w)=   0.0000000    
+ -->% Blocks hard flagged for kurtosis(T)=  0.73068893    
+ -->% Blocks hard flagged for kurtosis(w)=   0.0000000    
+ -->% Blocks hard flagged for kurtosis & skewness=  0.73068893    
+ eof skewkurt()
+ ***************************************
+ ***************************************
+ Orienting the sonic to compute horizontal wind directions
+ --> Angle between due East and the sonic x-axis is   54.999999999999993       deg
+ --> Wind direction where the wind is blowing directly from the IRGA to the sonic is   130.00000000000000       deg 
+ --> Separation unit vector (pointing to IRGA) is -0.64278770014058573       0.76604436721901192        0.0000000000000000     
+ eof orient()
+ ***************************************
+ ***************************************
+ Applying the planar fit
+ Planar frame is an ONB
+ ~~~~~j dot k=  1.38777878078144568E-017
+ ~~~~~i dot k= -1.38777878078144568E-017
+ ~~~~~i dot j=  1.56125112837912638E-017
+ ~~~~~i dot e=  0.99859620851171393     
+ ~~~~~j dot e=  5.55111512312578270E-017
+ kvec=  4.86473062283551763E-002  9.87252340881870777E-002  0.99392493064162413     
+ -->Pitch is:   2.8020855916831260       degrees (rotated about sonic y axis)
+ -->Roll is:  -5.6725064937932261       degrees (rotated about sonic x axis)
+ -->Mean of block averaged system vertical velocities=  0.14535976204038162       [m/s]
+ -->Mean of block averaged planar vertical velocities= -2.05662676127448243E-017  [m/s]
+ -->Offset is:  1.57431847693416532E-002  [m/s]
+ eof planarfit()
+ ***************************************
+ ---------------------------------------------------------------------
+ Reading from file:../input/pNYÅ2007-2010.nc                                                      
+ ->Done synchronizing the slow pressure
+ ---------------------------------------------------------------------
+ ---------------------------------------------------------------------
+ ***Searching for measurement heights***
+ -->Reading and synchronizing measurement heights from file:../input/diurnalzmB2.txt                                                        
+ -->Max in file z=   1.3899999999999999       [m]
+ -->Min in file z=   1.3000000000000000       [m]
+ ->Done allocating measurement heights
+ ---------------------------------------------------------------------
+ ----------------------------------------------------------------------------------
+ diaganc(): Diagnosing ancillary variables (check for warnings).
+ Done diaganc().
+ ----------------------------------------------------------------------------------
+ *******************************************************************************
+ starting flag routine.
+ -->Set flags for         958  blocks
+ -->Hard flagged (flag 2)  0.73068893      (%) of blocks for exceeding w-itc limits
+ -->Hard flagged (flag 2)   9.4989557      (%) of blocks for non-stationarity
+ -->Hard flagged (flag 2)   7.6200418      (%) of blocks for spike limit
+ -->Hard flagged (flag 2)   2.7139876      (%) of blocks for possible flow distortion
+ -->Hard flagged (flag 2)   4.4885178      (%) of blocks for excess block vertical wind speed
+ -->Removed   15.448852      (%) of blocks due to hard flagging
+ eof flag routine.
+ *******************************************************************************
+ *******************************************************************************
+ starting ffse routine.
+ --> Max ffse(tsw)=  1.47719650384243641E-002
+ --> Max ffse(hw)=  2.72708164538965879E-006
+ eof ffse routine.
+ *******************************************************************************
+ Starting spectral analysis
+ Max frequency is:   9.9999998509883898     
+ Min frequency is:   0.0000000000000000     
+ ------Active spectral windows:         565
+ ------Matched u-variances for   100.00000      % of active windows
+ ------Matched v-variances for   100.00000      % of active windows
+ ------Matched w-variances for   100.00000      % of active windows
+ ------Matched T-variances for   100.00000      % of active windows
+ ------Matched h-variances for   100.00000      % of active windows
+ ------Matched uw-covariances for   100.00000      % of active windows
+ ------Matched vw-covariances for   100.00000      % of active windows
+ ------Matched Tw-covariances for   100.00000      % of active windows
+ ------Matched hw-covariances for   100.00000      % of active windows
+ ------Matched u-variances (Ogive) for   100.00000      % of active windows
+ ------Matched v-variances (Ogive) for   100.00000      % of active windows
+ ------Matched w-variances (Ogive) for   100.00000      % of active windows
+ ------Matched T-variances (Ogive) for   100.00000      % of active windows
+ ------Matched h-variances (Ogive) for   100.00000      % of active windows
+ --> Restructuring spectral arrays, removing nan entries and Konno Ohmachi smoothing to save disk space
+ End of spectral analysis
+ *******************************************************************************
+ *******************************************************************************
+ Starting structure function & autocorrelation computation
+ -->         810  active statistical windows
+ End of structure function & autocorrelation computation
+ *******************************************************************************
+ *******************************************************************************
+ Starting block calculations
+ -->Calculated block values for         958  blocks
+ -->Block lengths correspond to an averaging period of          30  minutes.
+ -->Flux corrections converged in an average of           3  iterations.
+ -->with a maximum of         100  iterations.
+ eof block calculations
+ *******************************************************************************
+ ---------------------------------------------------------------------
+ Writing to file:../output/TOA5_1549.ts2_data.nc                                                 
+ ---------------------------------------------------------------------
